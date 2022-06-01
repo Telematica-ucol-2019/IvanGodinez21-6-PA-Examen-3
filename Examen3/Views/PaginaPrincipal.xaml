@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Examen3.Models"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Name="thisPaginaPrincipal"
+             x:Class="Examen3.Views.PaginaPrincipal"
+             Title="Vehiculos">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0" BackgroundColor="#e6e8fd">
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding Vehiculos}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Vehiculo">
+                                <Frame BackgroundColor="#ebf0ff">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Row="0" Grid.Column="0">
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Modelo: " TextColor="DimGray"/>
+                                                        <Span Text="{Binding Modelo}" TextColor="#5865F2"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Marca: " TextColor="DimGray"/>
+                                                        <Span Text="{Binding Marca.Nombre}" TextColor="#5865F2"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Año: " TextColor="DimGray"/>
+                                                        <Span Text="{Binding Ano}" TextColor="#5865F2"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                                            <Button
+                                                Text="™"
+                                                BackgroundColor="GhostWhite"
+                                                FontSize="Large"
+                                                CornerRadius="10"
+                                                Command="{Binding BindingContext.cmdVerMarca, Source={x:Reference thisPaginaPrincipal}}"
+                                                CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding BindingContext.cmdModificarVehiculo, Source={x:Reference thisPaginaPrincipal}}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+            <Grid Grid.Row="1" BackgroundColor="#5865F2">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Button
+                        Text="➕"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdAgregarVehiculo}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

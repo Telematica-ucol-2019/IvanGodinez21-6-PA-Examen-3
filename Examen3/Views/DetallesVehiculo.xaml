@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Examen3.Models"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Name="thisDetallesVehiculo"
+             x:Class="Examen3.Views.DetallesVehiculo"
+             Title="Detalles de la vehiculo">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0" BackgroundColor="#e6e8fd">
+                <StackLayout
+                            Margin="10"
+                            VerticalOptions="StartAndExpand"
+                            BindingContext="{Binding BindingContext.Vehiculo, Source={x:Reference thisDetallesVehiculo}}"
+                            x:DataType="model:Vehiculo">
+                    <Label Text="Modelo" TextColor="DimGray"/>
+                    <Entry
+                            BackgroundColor="White"
+                            PlaceholderColor="LightGray"
+                            TextColor="Gray"
+                            Text="{Binding Modelo, Mode=TwoWay}"
+                            Placeholder="Modelo">
+                    </Entry>
+                    <Label Text="Año" TextColor="DimGray"/>
+                    <Entry
+                            BackgroundColor="White"
+                            PlaceholderColor="LightGray"
+                            TextColor="Gray"
+                            Text="{Binding Ano, Mode=TwoWay}"
+                            Placeholder="Año">
+                    </Entry>
+                    <Label Text="Marca" TextColor="DimGray"/>
+                    <Entry
+                            BackgroundColor="White"
+                            PlaceholderColor="LightGray"
+                            TextColor="Gray"
+                            Text="{Binding Marca.Nombre, Mode=TwoWay}"
+                            Placeholder="Marca">
+                    </Entry>
+                    <Button
+                            Text="Agregar"
+                            BackgroundColor="#5865F2"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Command="{Binding BindingContext.cmdAgregarVechiculo , Source={x:Reference thisDetallesVehiculo}}"
+                            CommandParameter="{Binding .}"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
